@@ -67,7 +67,7 @@ export class AddTransactionComponent {
 
       try {
         // Invio della transazione tramite fetch
-        const response = await fetch(`${environment.backendUrl}v1/transactions`, {
+        const response = await fetch(`${environment.backendUrl}v1/transactios`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
