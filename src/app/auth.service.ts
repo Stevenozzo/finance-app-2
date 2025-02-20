@@ -4,6 +4,21 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
+  constructor() {}
 
-  constructor() { }
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  isAuthenticated(): boolean {
+    return !!this.getToken();
+  }
+
+  getAuthHeaders(): { Authorization?: string } {
+    const token = this.getToken();
+    if (token) {
+      return { Authorization: `Bearer ${token}` };
+    }
+    return {}; 
+  }
 }
