@@ -1,0 +1,21 @@
+<div class="container">
+  <h2>Storico Transazioni</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Importo</th>
+        <th>Data</th>
+        <th>Sito Web</th>
+        <th>Categoria</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let transaction of transactions">
+        <td>{{ transaction.transactionImport | currency }}</td>
+        <td>{{ transaction.transactionDate }}</td>
+        <td>{{ transaction.webSite }}</td>
+        <td>{{ transaction.categoryType }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

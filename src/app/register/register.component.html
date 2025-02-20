@@ -1,0 +1,60 @@
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card p-4 shadow" style="width: 400px;">
+      <h2 class="text-center">Registrazione</h2>
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="firstName" class="form-label">Nome</label>
+          <input type="text" id="firstName" class="form-control" formControlName="firstName">
+          <div class="text-danger" *ngIf="registerForm.controls['firstName'].invalid && registerForm.controls['firstName'].touched">
+            Inserisci il nome.
+          </div>
+        </div>
+  
+        <div class="mb-3">
+          <label for="lastName" class="form-label">Cognome</label>
+          <input type="text" id="lastName" class="form-control" formControlName="lastName">
+          <div class="text-danger" *ngIf="registerForm.controls['lastName'].invalid && registerForm.controls['lastName'].touched">
+            Inserisci il cognome.
+          </div>
+        </div>
+  
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" id="username" class="form-control" formControlName="username">
+          <div class="text-danger" *ngIf="registerForm.controls['username'].invalid && registerForm.controls['username'].touched">
+            Inserisci uno username valido.
+          </div>
+        </div>
+  
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" id="email" class="form-control" formControlName="email">
+          <div class="text-danger" *ngIf="registerForm.controls['email'].invalid && registerForm.controls['email'].touched">
+            Inserisci una email valida.
+          </div>
+        </div>
+  
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" id="password" class="form-control" formControlName="password">
+          <div class="text-danger" *ngIf="registerForm.controls['password'].invalid && registerForm.controls['password'].touched">
+            La password deve avere almeno 6 caratteri.
+          </div>
+        </div>
+  
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label">Conferma Password</label>
+          <input type="password" id="confirmPassword" class="form-control" formControlName="confirmPassword">
+          <div class="text-danger" *ngIf="!passwordsMatch() && registerForm.controls['confirmPassword'].touched">
+            Le password non coincidono.
+          </div>
+        </div>
+  
+        <button type="submit" class="btn btn-success w-100" [disabled]="registerForm.invalid || !passwordsMatch()">Registrati</button>
+      </form>
+  
+      <div class="text-center mt-3">
+        <p>Hai già un account? <a routerLink="/login">Fai il login</a></p>
+      </div>
+    </div>
+  </div>
