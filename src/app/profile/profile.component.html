@@ -5,22 +5,22 @@
   <form (ngSubmit)="updateProfile()">
     <div class="mb-3">
       <label for="username" class="form-label">Username</label>
-      <input type="text" class="form-control" id="username" [(ngModel)]="user.username" name="username" required>
+      <input type="text" class="form-control" id="username" [(ngModel)]="user.username" name="username">
     </div>
     
     <div class="mb-3">
       <label for="name" class="form-label">Nome</label>
-      <input type="text" class="form-control" id="name" [(ngModel)]="user.name" name="name" required>
+      <input type="text" class="form-control" id="name" [(ngModel)]="user.name" name="name">
     </div>
     
     <div class="mb-3">
       <label for="lastName" class="form-label">Cognome</label>
-      <input type="text" class="form-control" id="lastName" [(ngModel)]="user.lastName" name="lastName" required>
+      <input type="text" class="form-control" id="lastName" [(ngModel)]="user.lastName" name="lastName">
     </div>
     
     <div class="mb-3">
       <label for="email" class="form-label">Email</label>
-      <input type="email" class="form-control" id="email" [(ngModel)]="user.email" name="email" required>
+      <input type="email" class="form-control" id="email" [(ngModel)]="user.email" name="email">
     </div>
     
     <button type="submit" class="btn btn-primary">Aggiorna Profilo</button>

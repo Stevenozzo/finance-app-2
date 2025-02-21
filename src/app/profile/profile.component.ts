@@ -23,10 +23,11 @@ export class ProfileComponent {
     this.fetchUserProfile();
   }
 
+  // Funzione per ottenere i dati dell'utente
   fetchUserProfile() {
     const token = localStorage.getItem('token'); // Ottieni il token da localStorage
     if (token) {
-      this.http.get(`${environment.backendUrl}v0/users/me`, {
+      this.http.get(`${environment.backendUrl}v1/users/me`, {
         headers: { 'Authorization': `Bearer ${token}` }
       }).subscribe({
         next: (response) => {
@@ -42,9 +43,11 @@ export class ProfileComponent {
     }
   }
 
+  // Funzione per aggiornare il profilo dell'utente
   updateProfile() {
     const token = localStorage.getItem('token');
     if (token) {
+      // Creiamo un oggetto con solo i campi che vogliamo aggiornare
       const updateData = {
         name: this.user.name,
         lastName: this.user.lastName,
@@ -52,7 +55,13 @@ export class ProfileComponent {
         username: this.user.username,
       };
 
-      this.http.put(`${environment.backendUrl}v0/users/me`, updateData, {
+      // Controlla che i campi non siano vuoti prima di inviare la richiesta
+      if (!updateData.name || !updateData.lastName || !updateData.email || !updateData.username) {
+        alert('Per favore, compila tutti i campi.');
+        return;
+      }
+
+      this.http.put(`${environment.backendUrl}v1/users/me`, updateData, {
         headers: { 'Authorization': `Bearer ${token}` }
       }).subscribe({
         next: (response) => {
