@@ -7,6 +7,8 @@
         <th>Data</th>
         <th>Sito Web</th>
         <th>Categoria</th>
+        <th>Azioni</th>
+        <!-- Colonna per il pulsante Elimina -->
       </tr>
     </thead>
     <tbody>
@@ -15,6 +17,15 @@
         <td>{{ transaction.transactionDate }}</td>
         <td>{{ transaction.webSite }}</td>
         <td>{{ transaction.categoryType }}</td>
+        <td>
+          <!-- Pulsante per eliminare la transazione -->
+          <button
+            class="btn btn-danger"
+            (click)="deleteTransaction(transaction.id)"
+          >
+            Elimina
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>

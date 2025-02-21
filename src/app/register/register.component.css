@@ -1,0 +1,14 @@
+.image-cover {
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem 0 0 1rem; /* Stesso border-radius dell'immagine */
+  object-position: left; /* Sposta l'immagine a destra */
+}
+.card {
+  border-radius: 1rem;
+  overflow: hidden;
+}
