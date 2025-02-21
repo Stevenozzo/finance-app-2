@@ -1,19 +1,23 @@
 <!-- Navbar -->
 <nav class="navbar navbar-light bg-light px-3">
-    <span class="navbar-brand mb-0 h1">Gestione Finanziaria</span>
+  <span class="navbar-brand mb-0 h1">Gestione Finanziaria</span>
+  <!-- Bottoni Logout e Profilo -->
+  <div class="ml-auto">
+    <button class="btn btn-primary" routerLink="/user/profile">Profilo</button>
     <button class="btn btn-danger" (click)="logout()">Logout</button>
-  </nav>
-  
-  <!-- Contenitore Centrale -->
-  <div class="container d-flex flex-column align-items-center" style="margin-top: 20px;">
-    <!-- Bottoni di Navigazione -->
-    <div class="mb-4 d-flex gap-3">
-      <button class="btn btn-primary" routerLink="/user/transactions">Storico Transazioni</button>
-      <button class="btn btn-success" routerLink="/user/add-transaction">Aggiungi Transazione</button>
-    </div>
-  
-    <!-- Contenitore della sezione attuale -->
-    <div class="w-50">
-      <router-outlet></router-outlet>
-    </div>
   </div>
+</nav>
+  
+<!-- Contenitore Centrale -->
+<div class="container d-flex flex-column align-items-center" style="margin-top: 20px;">
+  <!-- Bottoni di Navigazione -->
+  <div class="mb-4 d-flex gap-3">
+    <button class="btn btn-primary" routerLink="/user/transactions">Storico Transazioni</button>
+    <button class="btn btn-success" routerLink="/user/add-transaction">Aggiungi Transazione</button>
+  </div>
+
+  <!-- Contenitore della sezione attuale -->
+  <div class="w-50">
+    <router-outlet></router-outlet>
+  </div>
+</div>

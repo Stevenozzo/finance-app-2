@@ -1,0 +1,28 @@
+<div *ngIf="isLoading">Caricamento...</div>
+<div *ngIf="!isLoading && user">
+  <h2>Profilo Utente</h2>
+  
+  <form (ngSubmit)="updateProfile()">
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" class="form-control" id="username" [(ngModel)]="user.username" name="username" required>
+    </div>
+    
+    <div class="mb-3">
+      <label for="name" class="form-label">Nome</label>
+      <input type="text" class="form-control" id="name" [(ngModel)]="user.name" name="name" required>
+    </div>
+    
+    <div class="mb-3">
+      <label for="lastName" class="form-label">Cognome</label>
+      <input type="text" class="form-control" id="lastName" [(ngModel)]="user.lastName" name="lastName" required>
+    </div>
+    
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" [(ngModel)]="user.email" name="email" required>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Aggiorna Profilo</button>
+  </form>
+</div>
