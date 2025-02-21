@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { environment } from '../../environments/environment.development';
-import { AuthService } from '../auth.service';  // Importa AuthService
 
 interface Category {
   id: number;
@@ -19,7 +18,6 @@ interface Category {
 })
 export class AddTransactionComponent {
   private fb = inject(FormBuilder);
-  private authService = inject(AuthService);  // Inietta AuthService
 
   transactionForm: FormGroup = this.fb.group({
     transactionImport: ['', [Validators.required]],
@@ -43,9 +41,10 @@ export class AddTransactionComponent {
 
     try {
       // Recupero delle categorie tramite fetch
-      const response = await fetch(`${environment.backendUrl}v1/categories?transactiosTypes=${transactionType}`, {
+      const token = localStorage.getItem('token');  // Recupera il token direttamente da localStorage
+      const response = await fetch(`${environment.backendUrl}v1/categories/${transactionType}`, {
         method: 'GET',
-        headers: this.authService.getAuthHeaders()  // Usa il token dagli headers
+        headers: token ? { 'Authorization': `Bearer ${token}` } : {}  // Se il token è presente, lo includiamo negli header
       });
 
       if (!response.ok) {
@@ -67,11 +66,12 @@ export class AddTransactionComponent {
 
       try {
         // Invio della transazione tramite fetch
+        const token = localStorage.getItem('token');  // Recupera il token direttamente da localStorage
         const response = await fetch(`${environment.backendUrl}v1/transactios`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            ...this.authService.getAuthHeaders()  // Aggiungi il token agli headers
+            ...token ? { 'Authorization': `Bearer ${token}` } : {}  // Se il token è presente, lo includiamo negli header
           },
           body: JSON.stringify(formData)
         });

@@ -1,7 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../environments/environment.development';
-import { AuthService } from '../auth.service';  // Importa AuthService
 
 interface Transaction {
   transactionImport: number;
@@ -20,17 +19,16 @@ interface Transaction {
 export class TransactionsHistoryComponent implements OnInit {
   transactions: Transaction[] = [];
 
-  private authService = inject(AuthService);  // Inietta AuthService
-
   ngOnInit() {
     this.loadTransactions();
   }
 
   async loadTransactions() {
     try {
+      const token = localStorage.getItem('token');  // Recupera il token direttamente da localStorage
       const response = await fetch(`${environment.backendUrl}v1/transactios`, {
         method: 'GET',
-        headers: this.authService.getAuthHeaders()  // Usa il metodo getAuthHeaders per ottenere il token
+        headers: token ? { 'Authorization': `Bearer ${token}` } : {}  // Aggiungi il token solo se esiste
       });
 
       if (!response.ok) {

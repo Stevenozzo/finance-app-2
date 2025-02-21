@@ -23,8 +23,12 @@ export class LoginComponent implements OnInit {
   token: string | null = null; // Variabile per il token
 
   ngOnInit() {
-    // Recupera il token dal localStorage quando il componente viene inizializzato
+    // Recupera il token dal localStorage
     this.token = localStorage.getItem('token');
+    if (this.token) {
+      // Se c'è già un token, puoi reindirizzare l'utente automaticamente alla pagina principale
+      this.router.navigate(['/user']);
+    }
     console.log('Token recuperato nel ngOnInit:', this.token);  // Per debug
   }
 
@@ -86,4 +90,5 @@ export class LoginComponent implements OnInit {
       alert('Token non trovato');
     }
   }
+  
 }
