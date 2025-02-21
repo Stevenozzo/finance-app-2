@@ -1,31 +1,101 @@
-<!-- Navbar -->
-<nav class="navbar navbar-light bg-light px-3">
-  <span class="navbar-brand mb-0 h1">Ciao, {{ userName }}!</span>
-  <!-- Mostra il nome dell'utente -->
-  <!-- Bottoni Logout e Profilo -->
-  <div class="ml-auto">
-    <button class="btn btn-primary" routerLink="/user/profile">Profilo</button>
-    <button class="btn btn-danger" (click)="logout()">Logout</button>
-  </div>
-</nav>
+<div class="d-flex">
+  <!-- Sidebar -->
+  <div
+    class="d-flex flex-column flex-shrink-0 p-3 bg-light vh-100 sidebar"
+    [class.closed]="isSidebarClosed"
+  >
+    <a
+      href="/"
+      class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none"
+    >
+      <svg class="bi me-2" width="40" height="32">
+        <use xlink:href="#bootstrap"></use>
+      </svg>
+      <span class="fs-4">Sidebar</span>
+    </a>
 
-<!-- Contenitore Centrale -->
-<div
-  class="container d-flex flex-column align-items-center"
-  style="margin-top: 20px"
->
-  <!-- Bottoni di Navigazione -->
-  <div class="mb-4 d-flex gap-3">
-    <button class="btn btn-primary" routerLink="/user/transactions">
-      Storico Transazioni
-    </button>
-    <button class="btn btn-success" routerLink="/user/add-transaction">
-      Aggiungi Transazione
-    </button>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <a routerLink="/user/home" class="nav-link" routerLinkActive="active">
+          <svg class="bi me-2" width="16" height="16">
+            <use xlink:href="#home"></use>
+          </svg>
+          Home
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/user/add-transaction"
+          class="nav-link"
+          routerLinkActive="active"
+        >
+          <svg class="bi me-2" width="16" height="16">
+            <use xlink:href="#plus-circle"></use>
+          </svg>
+          Aggiungi Transazione
+        </a>
+      </li>
+      <li>
+        <a
+          routerLink="/user/transactions"
+          class="nav-link"
+          routerLinkActive="active"
+        >
+          <svg class="bi me-2" width="16" height="16">
+            <use xlink:href="#clock-history"></use>
+          </svg>
+          Storico Movimenti
+        </a>
+      </li>
+    </ul>
+
+    <hr class="mt-auto" />
+
+    <div class="dropdown">
+      <a
+        href="#"
+        class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
+        id="dropdownUser2"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+      >
+        <img
+          src="https://github.com/mdo.png"
+          alt=""
+          width="32"
+          height="32"
+          class="rounded-circle me-2"
+        />
+        <strong>{{ userName }}</strong>
+      </a>
+      <ul
+        class="dropdown-menu text-small shadow"
+        aria-labelledby="dropdownUser2"
+      >
+        <li><a class="dropdown-item" routerLink="/user/profile">Profilo</a></li>
+        <li><a class="dropdown-item" (click)="logout()">Sign out</a></li>
+      </ul>
+    </div>
   </div>
 
-  <!-- Contenitore della sezione attuale -->
-  <div class="w-50">
-    <router-outlet></router-outlet>
+  <!-- Contenuto principale -->
+  <div class="content flex-grow-1 d-flex flex-column vh-100">
+    <nav
+      class="navbar navbar-light bg-light px-3 d-flex justify-content-between align-items-center"
+    >
+      <div class="d-flex align-items-center">
+        <button class="btn btn-outline-primary me-3" (click)="toggleSidebar()">
+          ☰
+        </button>
+        <span class="navbar-brand mb-0 h1">Dashboard</span>
+      </div>
+      <div class="user-info">
+        <span class="fw-bold">Ciao, {{ userName }}!</span>
+      </div>
+    </nav>
+
+    <div class="container mt-4 flex-grow-1">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>

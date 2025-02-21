@@ -11,12 +11,12 @@ import { RouterModule } from '@angular/router';
 })
 export class UserScreenComponent implements OnInit {
   userName: string | null = null;
+  isSidebarClosed: boolean = false; // Stato della sidebar
 
   ngOnInit(): void {
     this.fetchUserInfo();
   }
 
-  // Metodo per recuperare le informazioni dell'utente usando fetch()
   fetchUserInfo() {
     const token = localStorage.getItem('token');
 
@@ -24,7 +24,7 @@ export class UserScreenComponent implements OnInit {
       fetch('http://localhost:8090/api/v1/users/me', {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${token}`, // Aggiungi il token nell'intestazione
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
       })
@@ -35,7 +35,7 @@ export class UserScreenComponent implements OnInit {
           return response.json();
         })
         .then((data) => {
-          this.userName = data.name; // Imposta il nome dell'utente
+          this.userName = data.name;
         })
         .catch((error) => {
           console.error('Errore:', error);
@@ -43,8 +43,12 @@ export class UserScreenComponent implements OnInit {
     }
   }
 
+  toggleSidebar() {
+    this.isSidebarClosed = !this.isSidebarClosed;
+  }
+
   logout() {
-    localStorage.removeItem('token'); // Rimuove il token
-    window.location.href = '/login'; // Reindirizza al login
+    localStorage.removeItem('token');
+    window.location.href = '/login';
   }
 }

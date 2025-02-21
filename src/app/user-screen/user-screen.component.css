@@ -1,0 +1,33 @@
+.sidebar {
+  width: 280px;
+  height: 100vh;
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.sidebar.closed {
+  width: 0;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.content {
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.sidebar.closed + .content {
+  margin-left: 0;
+}
+
+/* Nascondere il testo e gli elementi interni quando la sidebar è chiusa */
+.sidebar.closed * {
+  display: none;
+}
+
+/* Colorazione corretta dei bottoni attivi */
+.nav-link.active {
+  background-color: #0d6efd !important;
+  color: white !important;
+}

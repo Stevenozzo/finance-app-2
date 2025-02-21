@@ -61,7 +61,6 @@ export class LoginComponent implements OnInit {
         const data = await response.json();
         localStorage.setItem('token', data.token); // Salva il token in localStorage
         this.token = data.token; // Imposta il token nel componente
-        alert('Accesso effettuato!');
         this.router.navigate(['/user']);
       } catch (error) {
         console.error('Login failed', error);
