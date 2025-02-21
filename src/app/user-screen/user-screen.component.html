@@ -48,38 +48,11 @@
         </a>
       </li>
     </ul>
-
-    <hr class="mt-auto" />
-
-    <div class="dropdown">
-      <a
-        href="#"
-        class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
-        id="dropdownUser2"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-      >
-        <img
-          src="https://github.com/mdo.png"
-          alt=""
-          width="32"
-          height="32"
-          class="rounded-circle me-2"
-        />
-        <strong>{{ userName }}</strong>
-      </a>
-      <ul
-        class="dropdown-menu text-small shadow"
-        aria-labelledby="dropdownUser2"
-      >
-        <li><a class="dropdown-item" routerLink="/user/profile">Profilo</a></li>
-        <li><a class="dropdown-item" (click)="logout()">Sign out</a></li>
-      </ul>
-    </div>
   </div>
 
   <!-- Contenuto principale -->
   <div class="content flex-grow-1 d-flex flex-column vh-100">
+    <!-- Navbar -->
     <nav
       class="navbar navbar-light bg-light px-3 d-flex justify-content-between align-items-center"
     >
@@ -87,10 +60,37 @@
         <button class="btn btn-outline-primary me-3" (click)="toggleSidebar()">
           ☰
         </button>
-        <span class="navbar-brand mb-0 h1">Dashboard</span>
+        <span class="fw-bold fs-4">Finance</span>
+        <span class="ms-3 fs-5">Dashboard</span>
       </div>
-      <div class="user-info">
-        <span class="fw-bold">Ciao, {{ userName }}!</span>
+
+      <!-- Dropdown Profilo -->
+      <div class="dropdown">
+        <a
+          href="#"
+          class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
+          id="dropdownUser"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <img
+            src="https://github.com/mdo.png"
+            alt=""
+            width="32"
+            height="32"
+            class="rounded-circle me-2"
+          />
+          <strong>{{ userName }}</strong>
+        </a>
+        <ul
+          class="dropdown-menu text-small shadow"
+          aria-labelledby="dropdownUser"
+        >
+          <li>
+            <a class="dropdown-item" routerLink="/user/profile">Profilo</a>
+          </li>
+          <li><a class="dropdown-item" (click)="logout()">Sign out</a></li>
+        </ul>
       </div>
     </nav>
 

@@ -93,6 +93,7 @@ export class ProfileComponent {
         .then((response) => response.json())
         .then((data) => {
           alert('Profilo aggiornato con successo');
+          location.reload();
         })
         .catch((err) => {
           console.error("Errore durante l'aggiornamento del profilo", err);

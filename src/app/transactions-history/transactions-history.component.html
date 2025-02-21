@@ -1,32 +1,46 @@
-<div class="container">
-  <h2>Storico Transazioni</h2>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Importo</th>
-        <th>Data</th>
-        <th>Sito Web</th>
-        <th>Categoria</th>
-        <th>Azioni</th>
-        <!-- Colonna per il pulsante Elimina -->
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let transaction of transactions">
-        <td>{{ transaction.transactionImport | currency }}</td>
-        <td>{{ transaction.transactionDate }}</td>
-        <td>{{ transaction.webSite }}</td>
-        <td>{{ transaction.categoryType }}</td>
-        <td>
-          <!-- Pulsante per eliminare la transazione -->
-          <button
-            class="btn btn-danger"
-            (click)="deleteTransaction(transaction.id)"
-          >
-            Elimina
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<section class="intro">
+  <div class="bg-image h-100">
+    <div class="mask d-flex align-items-center h-100">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <div class="card shadow-2-strong" style="background-color: #f5f7fa">
+              <div class="card-body">
+                <h2>Storico Transazioni</h2>
+                <div class="table-responsive">
+                  <table class="table table-striped mb-0">
+                    <thead>
+                      <tr>
+                        <th>Importo</th>
+                        <th>Data</th>
+                        <th>Sito Web</th>
+                        <th>Categoria</th>
+                        <th>Azioni</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let transaction of transactions">
+                        <td>{{ transaction.transactionImport | currency }}</td>
+                        <td>{{ transaction.transactionDate }}</td>
+                        <td>{{ transaction.webSite }}</td>
+                        <td>{{ transaction.categoryType }}</td>
+                        <td>
+                          <button
+                            class="btn btn-danger"
+                            (click)="deleteTransaction(transaction.id)"
+                          >
+                            Elimina
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
