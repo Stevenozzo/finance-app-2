@@ -18,6 +18,9 @@ interface Transaction {
   styleUrls: ['./transactions-history.component.css'],
 })
 export class TransactionsHistoryComponent implements OnInit {
+  onSubmitTransaction() {
+    throw new Error('Method not implemented.');
+  }
   transactions: Transaction[] = [];
 
   ngOnInit() {

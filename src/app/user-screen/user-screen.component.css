@@ -1,3 +1,4 @@
+/* Sidebar */
 .sidebar {
   width: 280px;
   height: 100vh;
@@ -10,20 +11,17 @@
   width: 0;
   padding: 0;
   margin: 0;
-  overflow: hidden;
+  visibility: hidden; /* Nasconde la sidebar mantenendola nel flusso del documento */
+  opacity: 0; /* Rendila trasparente */
 }
 
+/* Contenuto principale */
 .content {
   transition: margin-left 0.3s ease-in-out;
 }
 
 .sidebar.closed + .content {
   margin-left: 0;
-}
-
-/* Nascondere il testo e gli elementi interni quando la sidebar è chiusa */
-.sidebar.closed * {
-  display: none;
 }
 
 /* Colorazione corretta dei bottoni attivi */

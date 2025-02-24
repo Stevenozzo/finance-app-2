@@ -1,18 +1,22 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { TransactionHistoryComponent } from './transactions-history.component';
+import { TransactionsHistoryComponent } from './transactions-history.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 
 describe('TransactionHistoryComponent', () => {
-  let component: TransactionHistoryComponent;
-  let fixture: ComponentFixture<TransactionHistoryComponent>;
+  let component: TransactionsHistoryComponent;
+  let fixture: ComponentFixture<TransactionsHistoryComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TransactionHistoryComponent, HttpClientTestingModule, ReactiveFormsModule]
+      imports: [
+        TransactionsHistoryComponent,
+        HttpClientTestingModule,
+        ReactiveFormsModule,
+      ],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TransactionHistoryComponent);
+    fixture = TestBed.createComponent(TransactionsHistoryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -28,11 +32,11 @@ describe('TransactionHistoryComponent', () => {
   });
 
   it('should add a new transaction when form is valid', () => {
-    component.transactionForm.setValue({
+    component.transactions.setValue({
       transactionImport: 100,
       transactionDate: '2025-02-20',
       webSite: 'example.com',
-      categoryType: 'SHOPPING'
+      categoryType: 'SHOPPING',
     });
     const spy = spyOn(component, 'onSubmitTransaction').and.callThrough();
     component.onSubmitTransaction();
