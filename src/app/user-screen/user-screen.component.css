@@ -2,28 +2,24 @@
 .sidebar {
   width: 280px;
   height: 100vh;
-  transition: all 0.3s ease-in-out;
+  transition: width 0.3s ease-in-out, visibility 0.3s ease-in-out;
   overflow: hidden;
   white-space: nowrap;
+  visibility: visible;
   position: relative;
 }
 
 .sidebar.closed {
   width: 0;
+  visibility: hidden; /* La sidebar diventa invisibile quando chiusa */
   padding: 0;
   margin: 0;
-  overflow: hidden; /* Nasconde la sidebar mantenendola nel flusso del documento */
   position: absolute;
-  left: -280px;
 }
 
 /* Contenuto principale */
 .content {
   transition: margin-left 0.3s ease-in-out;
-}
-
-.sidebar.closed + .content {
-  margin-left: 0;
 }
 
 /* Colorazione corretta dei bottoni attivi */
