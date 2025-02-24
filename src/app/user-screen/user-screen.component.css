@@ -5,14 +5,16 @@
   transition: all 0.3s ease-in-out;
   overflow: hidden;
   white-space: nowrap;
+  position: relative;
 }
 
 .sidebar.closed {
   width: 0;
   padding: 0;
   margin: 0;
-  visibility: hidden; /* Nasconde la sidebar mantenendola nel flusso del documento */
-  opacity: 0; /* Rendila trasparente */
+  overflow: hidden; /* Nasconde la sidebar mantenendola nel flusso del documento */
+  position: absolute;
+  left: -280px;
 }
 
 /* Contenuto principale */
