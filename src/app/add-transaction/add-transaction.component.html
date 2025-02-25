@@ -2,80 +2,75 @@
   <h2>Aggiungi Transazione</h2>
   <hr class="mt-0 mb-4" />
 
-  <div class="row">
-    <div class="col-xl-8 mx-auto">
-      <div class="card mb-4">
-        <div class="card-header">Dettagli Transazione</div>
-        <div class="card-body">
-          <form
-            [formGroup]="transactionForm"
-            (ngSubmit)="onSubmitTransaction()"
-          >
-            <div class="mb-3">
-              <label for="transactionImport" class="small mb-1">Importo</label>
-              <input
-                type="number"
-                class="form-control"
-                formControlName="transactionImport"
-                placeholder="Inserisci importo"
-              />
-            </div>
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <div class="p-3 border rounded shadow-sm bg-light">
+        <form [formGroup]="transactionForm" (ngSubmit)="onSubmitTransaction()">
+          <div class="mb-2">
+            <label for="transactionImport" class="small fw-bold">Importo</label>
+            <input
+              type="number"
+              class="form-control form-control-sm"
+              formControlName="transactionImport"
+              placeholder="Inserisci importo"
+            />
+          </div>
 
-            <div class="mb-3">
-              <label for="transactionDate" class="small mb-1">Data</label>
-              <input
-                type="date"
-                class="form-control"
-                formControlName="transactionDate"
-              />
-            </div>
+          <div class="mb-2">
+            <label for="transactionDate" class="small fw-bold">Data</label>
+            <input
+              type="date"
+              class="form-control form-control-sm"
+              formControlName="transactionDate"
+            />
+          </div>
 
-            <div class="mb-3">
-              <label for="webSite" class="small mb-1">Sito</label>
-              <input
-                type="text"
-                class="form-control"
-                formControlName="webSite"
-                placeholder="Inserisci sito"
-              />
-            </div>
+          <div class="mb-2">
+            <label for="webSite" class="small fw-bold">Sito</label>
+            <input
+              type="text"
+              class="form-control form-control-sm"
+              formControlName="webSite"
+              placeholder="Inserisci sito"
+            />
+          </div>
 
-            <div class="mb-3">
-              <label for="transactionType" class="small mb-1"
-                >Tipo di Transazione</label
-              >
-              <select
-                class="form-control"
-                formControlName="transactionType"
-                (change)="onTransactionTypeChange($event)"
-              >
-                <option value="">Seleziona...</option>
-                <option value="POSITIVE">Entrata</option>
-                <option value="NEGATIVE">Uscita</option>
-              </select>
-            </div>
-
-            <div class="mb-3">
-              <label for="categoryType" class="small mb-1">Categoria</label>
-              <select class="form-control" formControlName="categoryType">
-                <option
-                  *ngFor="let category of categories"
-                  [value]="category.categoryName"
-                >
-                  {{ category.categoryName }}
-                </option>
-              </select>
-            </div>
-
-            <button
-              type="submit"
-              class="btn btn-primary"
-              [disabled]="transactionForm.invalid"
+          <div class="mb-2">
+            <label for="transactionType" class="small fw-bold">Tipo</label>
+            <select
+              class="form-control form-control-sm"
+              formControlName="transactionType"
+              (change)="onTransactionTypeChange($event)"
             >
-              Aggiungi Transazione
-            </button>
-          </form>
-        </div>
+              <option value="">Seleziona...</option>
+              <option value="POSITIVE">Entrata</option>
+              <option value="NEGATIVE">Uscita</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="categoryType" class="small fw-bold">Categoria</label>
+            <select
+              class="form-control form-control-sm"
+              formControlName="categoryType"
+            >
+              <option
+                *ngFor="let category of categories"
+                [value]="category.categoryName"
+              >
+                {{ category.categoryName }}
+              </option>
+            </select>
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-primary w-100 btn-sm"
+            [disabled]="transactionForm.invalid"
+          >
+            <i class="fas fa-plus"></i> Aggiungi Transazione
+          </button>
+        </form>
       </div>
     </div>
   </div>

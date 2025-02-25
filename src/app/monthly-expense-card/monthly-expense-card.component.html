@@ -1,68 +1,61 @@
 <div class="container mt-4">
-  <div class="row">
+  <div class="row justify-content-center">
     <!-- Card con il totale speso -->
-    <div class="col-md-4">
-      <div class="card bg-light text-dark mb-3 shadow-sm">
-        <div class="card-body text-center">
-          <h5 class="card-title">Spese Mensili</h5>
+    <div class="col-12 col-md-4">
+      <div class="p-3 border rounded shadow-sm bg-light text-center">
+        <h5 class="fw-bold">Spese Mensili</h5>
 
-          <!-- Selettore Mese e Anno -->
-          <div class="d-flex justify-content-center gap-2 mb-3">
-            <select
-              [(ngModel)]="selectedMonth"
-              class="form-select w-auto"
-              (change)="getMonthlyExpenses()"
-            >
-              <option
-                *ngFor="let month of months; let i = index"
-                [value]="i + 1"
-              >
-                {{ month }}
-              </option>
-            </select>
-            <select
-              [(ngModel)]="selectedYear"
-              class="form-select w-auto"
-              (change)="getMonthlyExpenses()"
-            >
-              <option *ngFor="let year of years" [value]="year">
-                {{ year }}
-              </option>
-            </select>
-          </div>
-
-          <p class="card-text fs-3 fw-bold">
-            {{ totalSpent | currency : "EUR" }}
-          </p>
+        <!-- Selettore Mese e Anno -->
+        <div class="d-flex justify-content-center gap-2 mb-2">
+          <select
+            [(ngModel)]="selectedMonth"
+            class="form-select form-select-sm w-auto"
+            (change)="getMonthlyExpenses()"
+          >
+            <option *ngFor="let month of months; let i = index" [value]="i + 1">
+              {{ month }}
+            </option>
+          </select>
+          <select
+            [(ngModel)]="selectedYear"
+            class="form-select form-select-sm w-auto"
+            (change)="getMonthlyExpenses()"
+          >
+            <option *ngFor="let year of years" [value]="year">
+              {{ year }}
+            </option>
+          </select>
         </div>
+
+        <p class="fs-4 fw-bold text-primary">
+          {{ totalSpent | currency : "EUR" }}
+        </p>
       </div>
     </div>
 
     <!-- Lista delle transazioni -->
-    <div class="card mt-4 shadow-sm">
-      <div class="card-header fw-bold">Storico Transazioni</div>
-      <div class="card-body">
-        <ul class="list-group">
-          <li
-            class="list-group-item d-flex justify-content-between align-items-center"
-            *ngFor="let transaction of transactions"
+    <div class="col-12 col-md-8 mt-4">
+      <h5 class="fw-bold">Storico Transazioni</h5>
+      <ul class="list-group small shadow-sm">
+        <li
+          class="list-group-item d-flex justify-content-between align-items-center"
+          *ngFor="let transaction of transactions"
+        >
+          <div>
+            <span class="fw-bold">{{ transaction.categoryType }}</span> -
+            {{ transaction.webSite }} -
+            {{ transaction.transactionDate }}
+          </div>
+          <span
+            [ngClass]="{
+              'text-success': transaction.transactionImport > 0,
+              'text-danger': transaction.transactionImport < 0
+            }"
           >
-            <div>
-              <span class="fw-bold">{{ transaction.categoryType }}</span> -
-              {{ transaction.webSite }} -
-              {{ transaction.transactionDate }}
-            </div>
-            <span
-              [ngClass]="{
-                'text-success': transaction.transactionImport > 0,
-                'text-danger': transaction.transactionImport < 0
-              }"
-            >
-              {{ transaction.transactionImport | currency : "EUR" }}
-            </span>
-          </li>
-        </ul>
-      </div>
+            {{ transaction.transactionImport | currency : "EUR" }}
+          </span>
+        </li>
+      </ul>
     </div>
   </div>
 </div>

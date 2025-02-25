@@ -1,0 +1,12 @@
+h5 {
+  font-size: 1.1rem;
+}
+
+form select {
+  font-size: 0.85rem;
+}
+
+.list-group-item {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+}

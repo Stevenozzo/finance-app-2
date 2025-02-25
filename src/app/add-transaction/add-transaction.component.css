@@ -1,0 +1,8 @@
+form input,
+form select {
+  font-size: 0.9rem;
+}
+
+form label {
+  font-size: 0.85rem;
+}
