@@ -18,10 +18,10 @@ interface Transaction {
   styleUrls: ['./transactions-history.component.css'],
 })
 export class TransactionsHistoryComponent implements OnInit {
-  onSubmitTransaction() {
-    throw new Error('Method not implemented.');
-  }
   transactions: Transaction[] = [];
+  filteredTransactions: Transaction[] = [];
+  uniqueMonths: string[] = [];
+  selectedMonth: string | null = null;
 
   ngOnInit() {
     this.loadTransactions();
@@ -41,14 +41,64 @@ export class TransactionsHistoryComponent implements OnInit {
 
       const data: any[] = await response.json();
 
-      // Mappa i dati per formattare la data
       this.transactions = data.map((transaction) => ({
         ...transaction,
         transactionDate: this.formatDate(transaction.transactionDate),
       }));
+
+      this.extractUniqueMonths();
+      this.filteredTransactions = [...this.transactions]; // Mostra tutto all'inizio
     } catch (error) {
       console.error('Errore nel recupero delle transazioni', error);
       alert('Errore nel recupero delle transazioni.');
+    }
+  }
+
+  extractUniqueMonths() {
+    const mesiSet = new Set<string>();
+
+    this.transactions.forEach((transaction) => {
+      const monthYear = transaction.transactionDate
+        .split(' ')
+        .slice(1)
+        .join(' '); // "Gennaio 2024"
+      mesiSet.add(monthYear);
+    });
+
+    this.uniqueMonths = Array.from(mesiSet);
+  }
+
+  filterByMonth(month: string) {
+    this.selectedMonth = month;
+    this.filteredTransactions = this.transactions.filter((transaction) =>
+      transaction.transactionDate.includes(month)
+    );
+  }
+
+  async deleteTransaction(id: number) {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(
+        `${environment.backendUrl}v1/transactios/${id}`,
+        {
+          method: 'DELETE',
+          headers: token ? { Authorization: `Bearer ${token}` } : {},
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Errore HTTP! Status: ${response.status}`);
+      }
+
+      this.transactions = this.transactions.filter(
+        (transaction) => transaction.id !== id
+      );
+      this.extractUniqueMonths();
+      this.filterByMonth(this.selectedMonth || ''); // Mantiene il filtro attivo
+      alert('Transazione eliminata con successo.');
+    } catch (error) {
+      console.error('Errore nell’eliminazione della transazione', error);
+      alert("Errore nell'eliminazione della transazione.");
     }
   }
 
@@ -73,33 +123,5 @@ export class TransactionsHistoryComponent implements OnInit {
     ];
 
     return `${day} ${mesi[month - 1]} ${year}`;
-  }
-
-  async deleteTransaction(id: number) {
-    try {
-      const token = localStorage.getItem('token');
-      const response = await fetch(
-        `${environment.backendUrl}v1/transactios/${id}`,
-        {
-          method: 'DELETE',
-          headers: token ? { Authorization: `Bearer ${token}` } : {}, // Aggiungi il token se esiste
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error(
-          `Errore nell'eliminazione della transazione! Status: ${response.status}`
-        );
-      }
-
-      // Rimuovi la transazione eliminata dalla lista
-      this.transactions = this.transactions.filter(
-        (transaction) => transaction.id !== id
-      );
-      alert('Transazione eliminata con successo.');
-    } catch (error) {
-      console.error('Errore nel tentativo di eliminare la transazione', error);
-      alert("Errore nell'eliminazione della transazione.");
-    }
   }
 }

@@ -1,47 +1,51 @@
 <div class="container-xl px-4 mt-4">
-  <h2>Storico Movimenti</h2>
+  <h2>Gestione Transazioni</h2>
   <hr class="mt-0 mb-4" />
 
-  <div class="row">
-    <div class="col-xl-8 mx-auto">
-      <div class="card mb-4">
-        <div class="card-header">Dettagli Movimenti</div>
-        <div class="card-body">
-          <div *ngIf="transactions.length > 0; else noTransactions">
-            <div
-              *ngFor="let transaction of transactions"
-              class="transaction-card p-3 mb-3 rounded shadow-sm"
-            >
-              <div class="d-flex justify-content-between align-items-center">
-                <div>
-                  <h5 class="fw-bold text-primary">
-                    {{ transaction.transactionImport | currency : "EUR" }}
-                  </h5>
-                  <p class="mb-1 text-muted">
-                    <strong>Data:</strong> {{ transaction.transactionDate }}
-                  </p>
-                  <p class="mb-1 text-muted">
-                    <strong>Sito:</strong> {{ transaction.webSite }}
-                  </p>
-                  <p class="mb-0">
-                    <strong>Categoria:</strong> {{ transaction.categoryType }}
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  class="btn btn-danger btn-sm d-flex align-items-center"
-                  (click)="deleteTransaction(transaction.id)"
-                >
-                  <i class="fas fa-trash-alt me-2"></i> Elimina
-                </button>
-              </div>
-            </div>
-          </div>
-          <ng-template #noTransactions>
-            <p class="text-center text-muted">Nessuna transazione trovata.</p>
-          </ng-template>
+  <!-- Sezione per i mesi -->
+  <div class="d-flex flex-wrap gap-2 mb-3">
+    <button
+      *ngFor="let month of uniqueMonths"
+      class="btn btn-outline-primary btn-sm"
+      (click)="filterByMonth(month)"
+    >
+      {{ month }}
+    </button>
+  </div>
+
+  <!-- Lista transazioni -->
+  <div *ngIf="filteredTransactions.length > 0; else noTransactions">
+    <div class="row g-2">
+      <div
+        *ngFor="let transaction of filteredTransactions"
+        class="col-12 col-sm-6 col-md-4 col-lg-3"
+      >
+        <div class="transaction-card p-2 border rounded shadow-sm small">
+          <h6 class="fw-bold text-primary">
+            {{ transaction.transactionImport | currency : "EUR" }}
+          </h6>
+          <p class="mb-1 text-muted">
+            <strong>Data:</strong> {{ transaction.transactionDate }}
+          </p>
+          <p class="mb-1 text-muted">
+            <strong>Sito:</strong> {{ transaction.webSite }}
+          </p>
+          <p class="mb-0">
+            <strong>Categoria:</strong> {{ transaction.categoryType }}
+          </p>
+          <button
+            type="button"
+            class="btn btn-danger btn-sm mt-2 w-100"
+            (click)="deleteTransaction(transaction.id)"
+          >
+            <i class="fas fa-trash-alt"></i> Elimina
+          </button>
         </div>
       </div>
     </div>
   </div>
+
+  <ng-template #noTransactions>
+    <p class="text-center text-muted">Nessuna transazione trovata.</p>
+  </ng-template>
 </div>
