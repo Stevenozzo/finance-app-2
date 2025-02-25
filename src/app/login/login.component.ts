@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     this.token = localStorage.getItem('token');
     if (this.token) {
       // Se c'è già un token, puoi reindirizzare l'utente automaticamente alla pagina principale
-      this.router.navigate(['/user']);
+      this.router.navigate(['/user/home']);
     }
     console.log('Token recuperato nel ngOnInit:', this.token); // Per debug
   }
@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
         const data = await response.json();
         localStorage.setItem('token', data.token); // Salva il token in localStorage
         this.token = data.token; // Imposta il token nel componente
-        this.router.navigate(['/user']);
+        this.router.navigate(['/user/home']);
       } catch (error) {
         console.error('Login failed', error);
 
