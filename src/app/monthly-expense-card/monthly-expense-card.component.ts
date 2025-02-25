@@ -1,10 +1,13 @@
-import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
-import { Chart, registerables } from 'chart.js';
+import {
+  Component,
+  Input,
+  OnInit,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { environment } from '../../environments/environment.development';
-
-Chart.register(...registerables);
 
 @Component({
   selector: 'app-monthly-expense-card',
@@ -13,13 +16,11 @@ Chart.register(...registerables);
   templateUrl: './monthly-expense-card.component.html',
   styleUrls: ['./monthly-expense-card.component.css'],
 })
-export class MonthlyExpenseCardComponent implements OnInit {
+export class MonthlyExpenseCardComponent implements OnInit, OnChanges {
   @Input() userName: string | null = null;
   totalSpent: number = 0;
   totalIncome: number = 0;
   transactions: any[] = [];
-
-  @ViewChild('expenseChart') expenseChart!: ElementRef;
 
   months = [
     'Gennaio',
@@ -43,6 +44,17 @@ export class MonthlyExpenseCardComponent implements OnInit {
   ngOnInit(): void {
     this.generateYears();
     this.getMonthlyExpenses();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['selectedMonth'] || changes['selectedYear']) {
+      console.log(
+        'Month or year changed:',
+        this.selectedMonth,
+        this.selectedYear
+      );
+      this.getMonthlyExpenses();
+    }
   }
 
   generateYears() {
@@ -69,19 +81,28 @@ export class MonthlyExpenseCardComponent implements OnInit {
         .then((data) => {
           this.transactions = Array.isArray(data) ? data : [data];
 
-          // Filtra le transazioni per mese e anno
           const filteredTransactions = this.transactions.filter(
             (transaction: any) => {
-              // Parse the transaction date to a Date object
-              const transactionDate = new Date(transaction.transactionDate);
-              const transactionMonth = transactionDate.getMonth() + 1; // Mesi partono da 0
-              const transactionYear = transactionDate.getFullYear();
-
-              // Confronta mese e anno
-              return (
-                transactionMonth === currentMonth &&
-                transactionYear === currentYear
+              const transactionDate = new Date(
+                transaction.transactionDate[0],
+                transaction.transactionDate[1] - 1,
+                transaction.transactionDate[2]
               );
+              const transactionMonth = transactionDate.getMonth() + 1; // Mese 1-12
+              const transactionYear = transactionDate.getFullYear(); // Anno 4 cifre
+
+              // Formatto la data in YYYY-MM per il confronto
+              const transactionDateString = `${transactionYear}-${String(
+                transactionMonth
+              ).padStart(2, '0')}`;
+
+              // Formatto la data corrente in YYYY-MM per il confronto
+              const selectedDateString = `${currentYear}-${String(
+                currentMonth
+              ).padStart(2, '0')}`;
+
+              // Confronta le date
+              return transactionDateString === selectedDateString;
             }
           );
 
@@ -93,35 +114,10 @@ export class MonthlyExpenseCardComponent implements OnInit {
           this.totalSpent = filteredTransactions
             .filter((t) => t.transactionImport < 0)
             .reduce((sum, t) => sum + Math.abs(t.transactionImport), 0);
-
-          this.renderChart();
         })
         .catch((error) => {
           console.error('Errore nel recupero delle transazioni:', error);
         });
-    }
-  }
-
-  renderChart() {
-    if (this.expenseChart) {
-      new Chart(this.expenseChart.nativeElement, {
-        type: 'doughnut',
-        data: {
-          labels: ['Entrate', 'Uscite'],
-          datasets: [
-            {
-              data: [this.totalIncome, this.totalSpent],
-              backgroundColor: ['#28a745', '#dc3545'],
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-          plugins: {
-            legend: { position: 'bottom' },
-          },
-        },
-      });
     }
   }
 }
