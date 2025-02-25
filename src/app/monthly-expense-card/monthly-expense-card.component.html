@@ -1,0 +1,11 @@
+<!-- monthly-expense-card.component.html -->
+<div class="container mt-4">
+  <div class="card text-white bg-danger mb-3">
+    <div class="card-body text-center">
+      <h5 class="card-title">Questo mese hai speso</h5>
+      <p class="card-text fs-3 fw-bold">
+        {{ totalSpent | currency : "EUR" }}
+      </p>
+    </div>
+  </div>
+</div>

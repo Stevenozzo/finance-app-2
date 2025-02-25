@@ -20,7 +20,9 @@
               </thead>
               <tbody>
                 <tr *ngFor="let transaction of transactions">
-                  <td>{{ transaction.transactionImport | currency }}</td>
+                  <td>
+                    {{ transaction.transactionImport | currency : "EUR" }}
+                  </td>
                   <td>{{ transaction.transactionDate }}</td>
                   <td>{{ transaction.webSite }}</td>
                   <td>{{ transaction.categoryType }}</td>

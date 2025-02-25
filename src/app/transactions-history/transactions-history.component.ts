@@ -29,22 +29,50 @@ export class TransactionsHistoryComponent implements OnInit {
 
   async loadTransactions() {
     try {
-      const token = localStorage.getItem('token'); // Recupera il token direttamente da localStorage
+      const token = localStorage.getItem('token');
       const response = await fetch(`${environment.backendUrl}v1/transactios`, {
         method: 'GET',
-        headers: token ? { Authorization: `Bearer ${token}` } : {}, // Aggiungi il token solo se esiste
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
       });
 
       if (!response.ok) {
         throw new Error(`Errore HTTP! Status: ${response.status}`);
       }
 
-      const data: Transaction[] = await response.json();
-      this.transactions = data;
+      const data: any[] = await response.json();
+
+      // Mappa i dati per formattare la data
+      this.transactions = data.map((transaction) => ({
+        ...transaction,
+        transactionDate: this.formatDate(transaction.transactionDate),
+      }));
     } catch (error) {
       console.error('Errore nel recupero delle transazioni', error);
       alert('Errore nel recupero delle transazioni.');
     }
+  }
+
+  formatDate(dateArray: number[]): string {
+    if (!Array.isArray(dateArray) || dateArray.length < 3)
+      return 'Data non valida';
+
+    const [year, month, day] = dateArray;
+    const mesi = [
+      'Gennaio',
+      'Febbraio',
+      'Marzo',
+      'Aprile',
+      'Maggio',
+      'Giugno',
+      'Luglio',
+      'Agosto',
+      'Settembre',
+      'Ottobre',
+      'Novembre',
+      'Dicembre',
+    ];
+
+    return `${day} ${mesi[month - 1]} ${year}`;
   }
 
   async deleteTransaction(id: number) {

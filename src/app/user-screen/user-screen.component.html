@@ -11,7 +11,7 @@
       <svg class="bi me-2" width="40" height="32">
         <use xlink:href="#bootstrap"></use>
       </svg>
-      <span class="fs-4">Sidebar</span>
+      <span class="fw-bold fs-4">Finance</span>
     </a>
 
     <ul class="nav nav-pills flex-column mb-auto">
@@ -93,17 +93,6 @@
         </ul>
       </div>
     </nav>
-
-    <div class="container mt-4">
-      <div class="card text-white bg-danger mb-3">
-        <div class="card-body text-center">
-          <h5 class="card-title">Questo mese hai speso</h5>
-          <p class="card-text fs-3 fw-bold">
-            {{ totalSpent | currency : "EUR" }}
-          </p>
-        </div>
-      </div>
-    </div>
 
     <div class="container mt-4 flex-grow-1">
       <router-outlet></router-outlet>
