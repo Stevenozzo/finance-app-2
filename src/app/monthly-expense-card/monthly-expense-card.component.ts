@@ -114,6 +114,9 @@ export class MonthlyExpenseCardComponent implements OnInit, OnChanges {
           this.totalSpent = filteredTransactions
             .filter((t) => t.transactionImport < 0)
             .reduce((sum, t) => sum + Math.abs(t.transactionImport), 0);
+
+          // Aggiorna la lista delle transazioni nel "Storico Transazioni"
+          this.transactions = filteredTransactions;
         })
         .catch((error) => {
           console.error('Errore nel recupero delle transazioni:', error);
