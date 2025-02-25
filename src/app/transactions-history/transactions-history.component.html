@@ -1,44 +1,45 @@
 <div class="container-xl px-4 mt-4">
-  <!-- Aggiunto il container coerente -->
   <h2>Storico Movimenti</h2>
-  <!-- Titolo corretto -->
   <hr class="mt-0 mb-4" />
+
   <div class="row">
-    <div class="col-12">
+    <div class="col-xl-8 mx-auto">
       <div class="card mb-4">
+        <div class="card-header">Dettagli Movimenti</div>
         <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-borderless mb-0">
-              <thead>
-                <tr>
-                  <th>Importo</th>
-                  <th>Data</th>
-                  <th>Sito Web</th>
-                  <th>Categoria</th>
-                  <th>Azioni</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let transaction of transactions">
-                  <td>
+          <div *ngIf="transactions.length > 0; else noTransactions">
+            <div
+              *ngFor="let transaction of transactions"
+              class="transaction-card p-3 mb-3 rounded shadow-sm"
+            >
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h5 class="fw-bold text-primary">
                     {{ transaction.transactionImport | currency : "EUR" }}
-                  </td>
-                  <td>{{ transaction.transactionDate }}</td>
-                  <td>{{ transaction.webSite }}</td>
-                  <td>{{ transaction.categoryType }}</td>
-                  <td>
-                    <button
-                      type="button"
-                      class="btn btn-danger btn-sm px-3"
-                      (click)="deleteTransaction(transaction.id)"
-                    >
-                      <i class="fas fa-times"></i>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                  </h5>
+                  <p class="mb-1 text-muted">
+                    <strong>Data:</strong> {{ transaction.transactionDate }}
+                  </p>
+                  <p class="mb-1 text-muted">
+                    <strong>Sito:</strong> {{ transaction.webSite }}
+                  </p>
+                  <p class="mb-0">
+                    <strong>Categoria:</strong> {{ transaction.categoryType }}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  class="btn btn-danger btn-sm d-flex align-items-center"
+                  (click)="deleteTransaction(transaction.id)"
+                >
+                  <i class="fas fa-trash-alt me-2"></i> Elimina
+                </button>
+              </div>
+            </div>
           </div>
+          <ng-template #noTransactions>
+            <p class="text-center text-muted">Nessuna transazione trovata.</p>
+          </ng-template>
         </div>
       </div>
     </div>

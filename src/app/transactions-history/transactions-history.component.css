@@ -23,3 +23,22 @@ table th {
   background-clip: padding-box;
   box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
 }
+
+.transaction-card {
+  background: #f8f9fa;
+  border-left: 5px solid #007bff;
+  transition: 0.3s ease-in-out;
+}
+
+.transaction-card:hover {
+  background: #e9ecef;
+}
+
+.btn-danger {
+  transition: 0.3s ease-in-out;
+}
+
+.btn-danger:hover {
+  background: #dc3545;
+  color: white;
+}
