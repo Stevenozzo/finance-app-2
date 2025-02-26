@@ -19,14 +19,17 @@
               <!-- Nome e Cognome -->
               <div class="row">
                 <div class="col-md-6 mb-4">
+                  <label class="form-label small fw-bold" for="firstName"
+                    >Nome</label
+                  >
                   <div class="form-outline">
                     <input
                       type="text"
                       id="firstName"
                       class="form-control form-control-lg"
                       formControlName="firstName"
+                      placeholder="Mario"
                     />
-                    <label class="form-label small" for="firstName">Nome</label>
                     <div
                       class="text-danger small mt-1"
                       *ngIf="
@@ -39,16 +42,17 @@
                   </div>
                 </div>
                 <div class="col-md-6 mb-4">
+                  <label class="form-label small fw-bold" for="lastName"
+                    >Cognome</label
+                  >
                   <div class="form-outline">
                     <input
                       type="text"
                       id="lastName"
                       class="form-control form-control-lg"
                       formControlName="lastName"
+                      placeholder="Rossi"
                     />
-                    <label class="form-label small" for="lastName"
-                      >Cognome</label
-                    >
                     <div
                       class="text-danger small mt-1"
                       *ngIf="
@@ -65,16 +69,17 @@
               <!-- Nome utente e Email -->
               <div class="row">
                 <div class="col-md-6 mb-4">
+                  <label class="form-label small fw-bold" for="form2Example17"
+                    >Nome utente</label
+                  >
                   <div class="form-outline">
                     <input
                       type="text"
                       id="form2Example17"
                       class="form-control form-control-lg"
                       formControlName="username"
+                      placeholder="mario.rossi"
                     />
-                    <label class="form-label small" for="form2Example17"
-                      >Nome utente</label
-                    >
                     <div
                       class="text-danger small mt-1"
                       *ngIf="
@@ -87,16 +92,17 @@
                   </div>
                 </div>
                 <div class="col-md-6 mb-4">
+                  <label class="form-label small fw-bold" for="form2Example18"
+                    >Indirizzo email</label
+                  >
                   <div class="form-outline">
                     <input
                       type="email"
                       id="form2Example18"
                       class="form-control form-control-lg"
                       formControlName="email"
+                      placeholder="mario.rossi@example.com"
                     />
-                    <label class="form-label small" for="form2Example18"
-                      >Indirizzo email</label
-                    >
                     <div
                       class="text-danger small mt-1"
                       *ngIf="
@@ -113,16 +119,17 @@
               <!-- Password e Conferma password -->
               <div class="row">
                 <div class="col-md-6 mb-4">
+                  <label class="form-label small fw-bold" for="form2Example27"
+                    >Password</label
+                  >
                   <div class="form-outline">
                     <input
                       type="password"
                       id="form2Example27"
                       class="form-control form-control-lg"
                       formControlName="password"
+                      placeholder="••••••••"
                     />
-                    <label class="form-label small" for="form2Example27"
-                      >Password</label
-                    >
                     <div
                       class="text-danger small mt-1"
                       *ngIf="
@@ -135,16 +142,17 @@
                   </div>
                 </div>
                 <div class="col-md-6 mb-4">
+                  <label class="form-label small fw-bold" for="form2Example28"
+                    >Conferma password</label
+                  >
                   <div class="form-outline">
                     <input
                       type="password"
                       id="form2Example28"
                       class="form-control form-control-lg"
                       formControlName="confirmPassword"
+                      placeholder="••••••••"
                     />
-                    <label class="form-label small" for="form2Example28"
-                      >Conferma password</label
-                    >
                     <div
                       class="text-danger small mt-1"
                       *ngIf="
