@@ -1,19 +1,19 @@
-<section class="vh-100 gradient-custom">
+<section class="vh-100" style="background-color: #f8f9fa">
   <div class="container py-5 h-100">
     <div class="row justify-content-center align-items-center h-100">
-      <div class="col-12 col-lg-9 col-xl-7">
-        <div
-          class="card shadow-2-strong card-registration"
-          style="border-radius: 15px"
-        >
+      <div class="col-12 col-lg-10 col-xl-8">
+        <!-- Card più larga -->
+        <div class="card shadow-2-strong" style="border-radius: 15px">
           <div class="card-body p-4 p-md-5">
-            <!-- Sezione Logo -->
-            <div class="d-flex align-items-center mb-3 pb-1">
-              <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219"></i>
-              <span class="h1 fw-bold mb-0">Logo</span>
+            <!-- Sezione Logo con animazione -->
+            <div class="text-center mb-4">
+              <h2 class="fw-bold mb-0 animate__animated animate__fadeIn">
+                Crea il tuo account
+              </h2>
+              <p class="text-muted animate__animated animate__fadeIn">
+                Unisciti a noi e inizia la tua avventura!
+              </p>
             </div>
-
-            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Crea il tuo account</h3>
 
             <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
               <!-- Nome e Cognome -->
@@ -26,9 +26,9 @@
                       class="form-control form-control-lg"
                       formControlName="firstName"
                     />
-                    <label class="form-label" for="firstName">Nome</label>
+                    <label class="form-label small" for="firstName">Nome</label>
                     <div
-                      class="text-danger"
+                      class="text-danger small mt-1"
                       *ngIf="
                         registerForm.controls['firstName'].invalid &&
                         registerForm.controls['firstName'].touched
@@ -46,9 +46,11 @@
                       class="form-control form-control-lg"
                       formControlName="lastName"
                     />
-                    <label class="form-label" for="lastName">Cognome</label>
+                    <label class="form-label small" for="lastName"
+                      >Cognome</label
+                    >
                     <div
-                      class="text-danger"
+                      class="text-danger small mt-1"
                       *ngIf="
                         registerForm.controls['lastName'].invalid &&
                         registerForm.controls['lastName'].touched
@@ -70,11 +72,11 @@
                       class="form-control form-control-lg"
                       formControlName="username"
                     />
-                    <label class="form-label" for="form2Example17"
+                    <label class="form-label small" for="form2Example17"
                       >Nome utente</label
                     >
                     <div
-                      class="text-danger"
+                      class="text-danger small mt-1"
                       *ngIf="
                         registerForm.controls['username'].invalid &&
                         registerForm.controls['username'].touched
@@ -92,11 +94,11 @@
                       class="form-control form-control-lg"
                       formControlName="email"
                     />
-                    <label class="form-label" for="form2Example18"
+                    <label class="form-label small" for="form2Example18"
                       >Indirizzo email</label
                     >
                     <div
-                      class="text-danger"
+                      class="text-danger small mt-1"
                       *ngIf="
                         registerForm.controls['email'].invalid &&
                         registerForm.controls['email'].touched
@@ -118,11 +120,11 @@
                       class="form-control form-control-lg"
                       formControlName="password"
                     />
-                    <label class="form-label" for="form2Example27"
+                    <label class="form-label small" for="form2Example27"
                       >Password</label
                     >
                     <div
-                      class="text-danger"
+                      class="text-danger small mt-1"
                       *ngIf="
                         registerForm.controls['password'].invalid &&
                         registerForm.controls['password'].touched
@@ -140,11 +142,11 @@
                       class="form-control form-control-lg"
                       formControlName="confirmPassword"
                     />
-                    <label class="form-label" for="form2Example28"
+                    <label class="form-label small" for="form2Example28"
                       >Conferma password</label
                     >
                     <div
-                      class="text-danger"
+                      class="text-danger small mt-1"
                       *ngIf="
                         registerForm.controls['confirmPassword'].invalid &&
                         registerForm.controls['confirmPassword'].touched
@@ -157,19 +159,19 @@
               </div>
 
               <!-- Bottone di Registrazione -->
-              <div class="mt-4 pt-2">
-                <input
-                  data-mdb-ripple-init
-                  class="btn btn-primary btn-lg"
+              <div class="d-grid mt-4">
+                <button
+                  class="btn btn-primary btn-lg animate__animated animate__pulse"
                   type="submit"
-                  value="Registrati"
                   [disabled]="registerForm.invalid"
-                />
+                >
+                  Registrati
+                </button>
               </div>
 
               <!-- Link di Login -->
-              <div class="mt-3">
-                <p class="text-center">
+              <div class="text-center mt-3">
+                <p class="mb-0">
                   Hai già un account?
                   <button class="btn btn-link p-0" (click)="goToLogin()">
                     Accedi qui
@@ -178,7 +180,7 @@
               </div>
 
               <!-- Link legali -->
-              <div class="mt-3 text-center">
+              <div class="text-center mt-3">
                 <a href="#!" class="small text-muted">Termini di utilizzo.</a>
                 <a href="#!" class="small text-muted ms-2"
                   >Politica sulla privacy</a

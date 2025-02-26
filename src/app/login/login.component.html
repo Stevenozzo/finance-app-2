@@ -1,91 +1,80 @@
-<section class="vh-100 gradient-custom">
+<section class="vh-100" style="background-color: #f8f9fa">
   <div class="container py-5 h-100">
     <div class="row justify-content-center align-items-center h-100">
       <div class="col-12 col-lg-8 col-xl-6">
-        <div
-          class="card shadow-2-strong card-registration"
-          style="border-radius: 15px"
-        >
+        <div class="card shadow-2-strong" style="border-radius: 15px">
           <div class="card-body p-4 p-md-5">
+            <!-- Sezione Logo -->
+            <div class="text-center mb-4">
+              <h2 class="fw-bold mb-0">Accedi al tuo account</h2>
+              <p class="text-muted">
+                Inserisci le tue credenziali per accedere
+              </p>
+            </div>
+
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-              <!-- Logo e Titolo -->
-              <div class="d-flex align-items-center mb-3 pb-1">
-                <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219"></i>
-                <span class="h1 fw-bold mb-0">Logo</span>
-              </div>
-
-              <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Accedi al tuo account</h3>
-
               <!-- Username -->
-              <div class="row">
-                <div class="col-md-12 mb-4">
-                  <div class="form-outline">
-                    <input
-                      type="text"
-                      id="form2Example17"
-                      class="form-control form-control-lg"
-                      formControlName="username"
-                    />
-                    <label class="form-label" for="form2Example17"
-                      >Nome utente</label
-                    >
-                    <div
-                      class="text-danger"
-                      *ngIf="
-                        loginForm.controls['username'].invalid &&
-                        loginForm.controls['username'].touched
-                      "
-                    >
-                      Inserisci un nome utente valido.
-                    </div>
-                  </div>
+              <div class="mb-4">
+                <label class="form-label small" for="username"
+                  >Nome utente</label
+                >
+                <input
+                  type="text"
+                  id="username"
+                  class="form-control form-control-lg"
+                  formControlName="username"
+                  placeholder="Inserisci il tuo username"
+                />
+                <div
+                  class="text-danger small mt-1"
+                  *ngIf="
+                    loginForm.controls['username'].invalid &&
+                    loginForm.controls['username'].touched
+                  "
+                >
+                  Inserisci un nome utente valido.
                 </div>
               </div>
 
               <!-- Password -->
-              <div class="row">
-                <div class="col-md-12 mb-4">
-                  <div class="form-outline">
-                    <input
-                      type="password"
-                      id="form2Example27"
-                      class="form-control form-control-lg"
-                      formControlName="password"
-                    />
-                    <label class="form-label" for="form2Example27"
-                      >Password</label
-                    >
-                    <div
-                      class="text-danger"
-                      *ngIf="
-                        loginForm.controls['password'].invalid &&
-                        loginForm.controls['password'].touched
-                      "
-                    >
-                      La password deve avere almeno 6 caratteri.
-                    </div>
-                  </div>
+              <div class="mb-4">
+                <label class="form-label small" for="password">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  class="form-control form-control-lg"
+                  formControlName="password"
+                  placeholder="Inserisci la tua password"
+                />
+                <div
+                  class="text-danger small mt-1"
+                  *ngIf="
+                    loginForm.controls['password'].invalid &&
+                    loginForm.controls['password'].touched
+                  "
+                >
+                  La password deve avere almeno 6 caratteri.
                 </div>
               </div>
 
               <!-- Bottone di Login -->
-              <div class="mt-4 pt-2">
-                <input
-                  data-mdb-ripple-init
-                  class="btn btn-primary btn-lg w-100"
+              <div class="d-grid mt-4">
+                <button
+                  class="btn btn-primary btn-lg"
                   type="submit"
-                  value="Accedi"
                   [disabled]="loginForm.invalid"
-                />
+                >
+                  Accedi
+                </button>
               </div>
 
               <!-- Link di Recupero Password -->
-              <div class="mt-3 text-center">
+              <div class="text-center mt-3">
                 <a class="small text-muted" href="#!">Password dimenticata?</a>
               </div>
 
               <!-- Link di Registrazione -->
-              <div class="mt-3 text-center">
+              <div class="text-center mt-3">
                 <p class="mb-0">
                   Non hai un account?
                   <button class="btn btn-link p-0" (click)="goToRegister()">
@@ -95,7 +84,7 @@
               </div>
 
               <!-- Link legali -->
-              <div class="mt-3 text-center">
+              <div class="text-center mt-3">
                 <a href="#!" class="small text-muted">Termini di utilizzo.</a>
                 <a href="#!" class="small text-muted ms-2"
                   >Politica sulla privacy</a
