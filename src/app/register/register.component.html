@@ -1,37 +1,69 @@
-<section class="vh-100" style="background-color: #9a616d">
+<section class="vh-100 gradient-custom">
   <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col col-xl-10">
-        <div class="card" style="border-radius: 1rem; position: relative">
-          <div class="row g-0">
-            <div
-              class="col-md-6 col-lg-5 d-none d-md-block"
-              style="position: relative"
-            >
-              <img
-                src="https://images.pexels.com/photos/8191959/pexels-photo-8191959.jpeg"
-                alt="form di registrazione"
-                class="img-fluid image-cover"
-              />
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-12 col-lg-9 col-xl-7">
+        <div
+          class="card shadow-2-strong card-registration"
+          style="border-radius: 15px"
+        >
+          <div class="card-body p-4 p-md-5">
+            <!-- Sezione Logo -->
+            <div class="d-flex align-items-center mb-3 pb-1">
+              <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219"></i>
+              <span class="h1 fw-bold mb-0">Logo</span>
             </div>
-            <div class="col-md-6 col-lg-7 d-flex align-items-center">
-              <div class="card-body p-4 p-lg-5 text-black">
-                <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-                  <!-- Logo e Titolo -->
-                  <div class="d-flex align-items-center mb-3 pb-1">
-                    <i
-                      class="fas fa-cubes fa-2x me-3"
-                      style="color: #ff6219"
-                    ></i>
-                    <span class="h1 fw-bold mb-0">Logo</span>
+
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Crea il tuo account</h3>
+
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+              <!-- Nome e Cognome -->
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input
+                      type="text"
+                      id="firstName"
+                      class="form-control form-control-lg"
+                      formControlName="firstName"
+                    />
+                    <label class="form-label" for="firstName">Nome</label>
+                    <div
+                      class="text-danger"
+                      *ngIf="
+                        registerForm.controls['firstName'].invalid &&
+                        registerForm.controls['firstName'].touched
+                      "
+                    >
+                      Inserisci un nome valido.
+                    </div>
                   </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    <input
+                      type="text"
+                      id="lastName"
+                      class="form-control form-control-lg"
+                      formControlName="lastName"
+                    />
+                    <label class="form-label" for="lastName">Cognome</label>
+                    <div
+                      class="text-danger"
+                      *ngIf="
+                        registerForm.controls['lastName'].invalid &&
+                        registerForm.controls['lastName'].touched
+                      "
+                    >
+                      Inserisci un cognome valido.
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-                  <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px">
-                    Crea il tuo account
-                  </h5>
-
-                  <!-- Nome utente -->
-                  <div class="form-outline mb-4">
+              <!-- Nome utente e Email -->
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
                     <input
                       type="text"
                       id="form2Example17"
@@ -51,9 +83,9 @@
                       Inserisci un nome utente valido.
                     </div>
                   </div>
-
-                  <!-- Email -->
-                  <div class="form-outline mb-4">
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
                     <input
                       type="email"
                       id="form2Example18"
@@ -73,9 +105,13 @@
                       Inserisci un'email valida.
                     </div>
                   </div>
+                </div>
+              </div>
 
-                  <!-- Password -->
-                  <div class="form-outline mb-4">
+              <!-- Password e Conferma password -->
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
                     <input
                       type="password"
                       id="form2Example27"
@@ -95,9 +131,9 @@
                       La password deve avere almeno 6 caratteri.
                     </div>
                   </div>
-
-                  <!-- Conferma password -->
-                  <div class="form-outline mb-4">
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
                     <input
                       type="password"
                       id="form2Example28"
@@ -117,35 +153,38 @@
                       Le password devono corrispondere.
                     </div>
                   </div>
-
-                  <!-- Bottone di Registrazione -->
-                  <div class="pt-1 mb-4">
-                    <button
-                      class="btn btn-dark btn-lg btn-block"
-                      type="submit"
-                      [disabled]="registerForm.invalid"
-                    >
-                      Registrati
-                    </button>
-                  </div>
-
-                  <!-- Link di Login -->
-                  <p class="mb-5 pb-lg-2" style="color: #393f81">
-                    Hai già un account?
-                    <button class="btn btn-link p-0" (click)="goToLogin()">
-                      Accedi qui
-                    </button>
-                  </p>
-
-                  <!-- Link legali -->
-                  <!-- Link legali -->
-                  <a href="#!" class="small text-muted">Termini di utilizzo.</a>
-                  <a href="#!" class="small text-muted ms-2"
-                    >Politica sulla privacy</a
-                  >
-                </form>
+                </div>
               </div>
-            </div>
+
+              <!-- Bottone di Registrazione -->
+              <div class="mt-4 pt-2">
+                <input
+                  data-mdb-ripple-init
+                  class="btn btn-primary btn-lg"
+                  type="submit"
+                  value="Registrati"
+                  [disabled]="registerForm.invalid"
+                />
+              </div>
+
+              <!-- Link di Login -->
+              <div class="mt-3">
+                <p class="text-center">
+                  Hai già un account?
+                  <button class="btn btn-link p-0" (click)="goToLogin()">
+                    Accedi qui
+                  </button>
+                </p>
+              </div>
+
+              <!-- Link legali -->
+              <div class="mt-3 text-center">
+                <a href="#!" class="small text-muted">Termini di utilizzo.</a>
+                <a href="#!" class="small text-muted ms-2"
+                  >Politica sulla privacy</a
+                >
+              </div>
+            </form>
           </div>
         </div>
       </div>
