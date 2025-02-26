@@ -88,20 +88,16 @@ export class MonthlyExpenseCardComponent implements OnInit, OnChanges {
                 transaction.transactionDate[1] - 1,
                 transaction.transactionDate[2]
               );
-              const transactionMonth = transactionDate.getMonth() + 1; // Mese 1-12
-              const transactionYear = transactionDate.getFullYear(); // Anno 4 cifre
-
-              // Formatto la data in YYYY-MM per il confronto
+              const transactionMonth = transactionDate.getMonth() + 1;
+              const transactionYear = transactionDate.getFullYear();
               const transactionDateString = `${transactionYear}-${String(
                 transactionMonth
               ).padStart(2, '0')}`;
 
-              // Formatto la data corrente in YYYY-MM per il confronto
               const selectedDateString = `${currentYear}-${String(
                 currentMonth
               ).padStart(2, '0')}`;
 
-              // Confronta le date
               return transactionDateString === selectedDateString;
             }
           );
@@ -115,12 +111,55 @@ export class MonthlyExpenseCardComponent implements OnInit, OnChanges {
             .filter((t) => t.transactionImport < 0)
             .reduce((sum, t) => sum + Math.abs(t.transactionImport), 0);
 
-          // Aggiorna la lista delle transazioni nel "Storico Transazioni"
-          this.transactions = filteredTransactions;
+          // Formatta la data delle transazioni
+          this.transactions = filteredTransactions.map((transaction) => {
+            // Aggiungi la proprietà formattedDate per mostrare la data nel formato corretto
+            const formattedDate = this.formatDate(transaction.transactionDate);
+            return { ...transaction, formattedDate };
+          });
         })
         .catch((error) => {
           console.error('Errore nel recupero delle transazioni:', error);
         });
     }
+  }
+
+  // Funzione di formattazione della data
+  formatDate(date: any): string {
+    let day: number, month: number, year: number;
+
+    // Verifica se la data è già un array nel formato [anno, mese, giorno]
+    if (Array.isArray(date) && date.length === 3) {
+      [year, month, day] = date;
+    }
+    // Se la data è una stringa (ad esempio '2025-02-25'), la converte in un oggetto Date
+    else if (typeof date === 'string' || date instanceof Date) {
+      const dateObj = new Date(date);
+      year = dateObj.getFullYear();
+      month = dateObj.getMonth(); // Mese 0-11, quindi si deve sommare 1
+      day = dateObj.getDate();
+    }
+    // Altrimenti, restituisce un messaggio di errore
+    else {
+      return 'Data non valida';
+    }
+
+    const months = [
+      'Gennaio',
+      'Febbraio',
+      'Marzo',
+      'Aprile',
+      'Maggio',
+      'Giugno',
+      'Luglio',
+      'Agosto',
+      'Settembre',
+      'Ottobre',
+      'Novembre',
+      'Dicembre',
+    ];
+
+    // Restituisce la data formattata come "25 Febbraio 2025"
+    return `${day} ${months[month - 1]} ${year}`;
   }
 }
